@@ -1,0 +1,102 @@
+<!--Menu de la vista crear, editar y gestionarVehiculo-->
+<div style="border: solid; width: 51%">
+    <div>
+        <input type="submit" value="crear vehiculo" (click)="flagCrearV()">
+    </div>
+    <div>
+        <input type="submit" value="editar vehiculo" (click)="flagEditarV()">
+    </div>
+    <div>
+        <input type="submit" value="gestionar vehiculo" (click)="flagGestionarV()">
+    </div>
+</div>
+<!--Vista crear y editar vehiculo-->
+<div style="border: solid; width: 51%">
+    <h3>{{titulo}}</h3>
+    <div *ngIf="flagCrear==true|| flagEditar==true">
+        <div style="width: 50%">
+            <div style="float: left; width: 25%">
+                <h4>marcas</h4>
+                <select name="marcas" id="marcas" [(ngModel)]="idMarca" (change)="listarLineas()" [disabled]="flagEditar==true">
+              <option *ngFor="let marc of listaMarcasDTO" value="{{marc.idMarca}}">{{marc.nombre}}</option>
+              </select>
+            </div>
+            <div style="float: right; width: 25%">
+                <h4>Lineas</h4>
+                <select name="lineas" id="lineas" [disabled]="flagEditar==true">
+                <option *ngFor="let linea of listaLineasDTO" value="{{linea.idLinea}}">{{linea.nombre}}</option>
+            </select>
+            </div>
+            <br>
+            <br>
+            <br><br><br><br>
+        </div>
+        <div style="width: 50%">
+            <div style="float: left; width: 25%">
+                <h4>Placa</h4>
+                <br>
+                <input type="text">
+                <br>
+            </div>
+            <div style="float: right; width: 25%">
+                <h4>Modelo</h4>
+                <br>
+                <input type="text">
+                <br>
+            </div>
+            <br><br><br><br><br><br><br>
+            <div style="float: right" *ngIf="flagCrear==true">
+                <input type="submit" value="Crear Vehiculo" (click)="crearVehiculo()">
+            </div>
+            <div style="float: right" *ngIf="flagEditar==true">
+                <input type="submit" value="Editar Vehiculo" (click)="editarVehiculo()">
+            </div>
+
+
+        </div>
+
+
+    </div>
+    <!--Vista gestionar vehiculo-->
+    <div *ngIf="flagGestionar==true">
+        <div style="float: left; width: 25%">
+            <h4>marcas</h4>
+            <select name="marcas" id="marcas" [(ngModel)]="idMarca" (change)="listarLineas()">
+          <option *ngFor="let marc of listaMarcasDTO" value="{{marc.idMarca}}">{{marc.nombre}}</option>
+          </select>
+        </div>
+        <div style="float: right; width: 25%">
+            <h4>Lineas</h4>
+            <select name="lineas" id="lineas">
+            <option *ngFor="let linea of listaLineasDTO" value="{{linea.idLinea}}">{{linea.nombre}}</option>
+        </select>
+        </div>
+        <br><br><br><br><br><br>
+        <input type="submit" (click)="gestionarVehiculo()" value="Gestionar vehiculo">
+
+        <table style="width: 40%;border-collapse: collapse;" border="1" cellpadding="2">
+            <tbody>
+                <tr>
+                    <td> Marca </td>
+                    <td> Linea </td>
+                    <td> Placa</td>
+                    <td> Modelo</td>
+                    <td>
+                        acciones
+                    </td>
+                </tr>
+                <tr *ngFor="let vehiculo of listaVehiculosDTO">
+                    <td> {{vehiculo.marca}} </td>
+                    <td> {{vehiculo.linea}} </td>
+                    <td> {{vehiculo.placa}}</td>
+                    <td> {{vehiculo.modelo}}</td>
+                    <td>
+                        <input value="Editar" type="submit" (click)="editarVehiculo($event)" />
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

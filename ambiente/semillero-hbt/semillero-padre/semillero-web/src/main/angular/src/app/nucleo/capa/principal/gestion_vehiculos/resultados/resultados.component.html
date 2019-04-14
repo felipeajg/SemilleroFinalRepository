@@ -1,0 +1,33 @@
+<form>
+    <h2>
+        {{ marca }}
+    </h2>
+    <h3> Componente hijo / Presentacion</h3>
+    <div class="card">
+        <div class="section">
+            {{ placa }}
+        </div>
+    </div>
+
+    <div>
+        <h2>marcas</h2>
+        <select name="marcas" id="marcas" [(ngModel)]="idMarca" (change)="listarLineas()">
+						<option *ngFor="let marc of listaMarcasDTO" value="{{marc.idMarca}}">{{marc.nombre}}</option>
+				</select>
+    </div>
+
+    <div>
+        <h2>Lineas</h2>
+        <select name="lineas" id="lineas">
+					<option *ngFor="let linea of listaLineasDTO" value="linea.idLinea">{{linea.nombre}}</option>
+			</select>
+    </div>
+
+
+    <h2>Llamado servicio</h2>
+    <input value="Consultar personas" type="submit" (click)="consultarPersonas()" />
+
+
+
+    <pre>{{ listaPersonasDTO | json }}</pre>
+</form>
